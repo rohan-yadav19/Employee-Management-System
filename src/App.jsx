@@ -8,7 +8,7 @@ const App = () => {
     <>
       {/* <Login />*/}
       {/* <EmployeeDashBoard />*/}
-      <AdminDashBoard />
+      {/* <AdminDashBoard />*/}
     </>
   );
 };
