@@ -44,8 +44,10 @@ const App = () => {
       {!user ? <Login handleLogin={handleLogin} /> : ""}
       {user == "admin" ? (
         <AdminDashBoard />
-      ) : (
+      ) : user == "employee" ? (
         <EmployeeDashBoard data={loggedInUserData} />
+      ) : (
+        ""
       )}
     </>
   );
