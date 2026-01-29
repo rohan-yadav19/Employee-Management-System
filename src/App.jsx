@@ -9,14 +9,16 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [loggedInUserData, setLoggedInUserData] = useState(null);
   const authData = useContext(AuthContext);
-  // useEffect(() => {
-  // if (authData) {
-  //  const LoggedInUser = localStorage.getItem("LoggedInUser");
-  //  if (LoggedInUser) {
-  //   setUser(LoggedInUser.role);
-  //   }
-  // }
-  //}, [authData]);
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("LoggedInUser");
+    if (loggedInUser) {
+      console.log("user logged in");
+
+      //const userData = JSON.parse(loggedInUser);
+      //setUser(userData.role);
+      //setLoggedInUserData(userData.data);
+    }
+  }, []);
 
   const handleLogin = (email, password) => {
     if (email == "admin@me.com" && password == "123") {
@@ -31,7 +33,7 @@ const App = () => {
         setLoggedInUserData(employee);
         localStorage.setItem(
           "LoggedInUser",
-          JSON.stringify({ role: "employee" }),
+          JSON.stringify({ role: "employee", data: employee }),
         );
       }
     } else {
