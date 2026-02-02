@@ -6,16 +6,38 @@ const AllTask = () => {
   console.log(authData.employees);
 
   return (
-    <div className="bg-[#1c1c1c] p-5 rounded mt-5 h-48 overflow-auto">
-      {authData.employees.map(function (elem) {
-        return (
-          <div className="bg-red-400 mb-2 py-2 px-4 flex justify-between rounded">
-            <h2 className="w-1/5 bg-red-600">{elem.firstName}</h2>
-            <h3>Make a UI Design</h3>
-            <h5>Status</h5>
-          </div>
-        );
-      })}
+    <div className="bg-[#1c1c1c] p-5 rounded mt-5 ">
+      <div className="bg-red-400 mb-2 py-2 px-4 flex justify-between rounded">
+        <h2 className="w-1/5 text-lg font-medium ">Employee Name</h2>
+        <h3 className="w-1/5 text-lg font-medium">New Task</h3>
+        <h5 className="w-1/5 ">Active Task</h5>
+        <h5 className="w-1/5 text-lg font-medium">Completed</h5>
+        <h5 className="w-1/5 text-lg font-medium">Failed</h5>
+      </div>
+      <div className=" overflow-auto">
+        {authData.employees.map(function (elem, idx) {
+          return (
+            <div
+              key={idx}
+              className="border-2  mb-2 py-2 px-4 flex justify-between rounded"
+            >
+              <h2 className="w-1/5 text-lg font-medium">{elem.firstName}</h2>
+              <h3 className="w-1/5 text-lg font-medium !text-blue-400">
+                {elem.taskStats.newTask}
+              </h3>
+              <h5 className="w-1/5 text-lg font-medium !text-yellow-400">
+                {elem.taskStats.active}
+              </h5>
+              <h5 className="w-1/5 text-lg font-medium !text-white">
+                {elem.taskStats.completed}
+              </h5>
+              <h5 className="w-1/5 text-lg font-medium !text-red-600">
+                {elem.taskStats.failed}
+              </h5>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
