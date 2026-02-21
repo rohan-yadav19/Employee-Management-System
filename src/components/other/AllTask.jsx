@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../../context/AuthProvider";
+import { AuthContext } from "../../context/AuthContext";
 
 const AllTask = () => {
-  const [userData, setUserData] = useContext(AuthContext);
+  const [userData] = useContext(AuthContext);
 
   return (
     <div className="bg-[#1c1c1c] p-5 rounded mt-5 ">

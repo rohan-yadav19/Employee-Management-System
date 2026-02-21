@@ -1,43 +1,53 @@
-import React from "react";
-import { useState, useContext } from "react";
-import { AuthContext } from "../../context/AuthProvider";
+import React, { useState, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
-const createTask = () => {
+const CreateTask = () => {
   const [userData, setUserData] = useContext(AuthContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
   const [assignTo, setAssignTo] = useState("");
   const [category, setCategory] = useState("");
-  const [newTask, setNewTask] = useState({});
   const submitHandler = (e) => {
     e.preventDefault();
-    setNewTask({
+    const task = {
+      taskNumber: Date.now(),
       title,
       description,
       date,
-      assignTo,
       category,
       active: false,
       newTask: true,
       completed: false,
       failed: false,
-    });
-    const data = userData;
+    };
 
-    data.forEach(function (elem) {
-      if (assignTo === elem.firstName) {
-        elem.tasks.push(newTask);
-        elem.taskStats.newTask = elem.taskStats.newTask + 1;
+    const updatedUsers = userData.map((employee) => {
+      if (assignTo === employee.firstName) {
+        const updatedTasks = [...employee.tasks, task];
+        const updatedTaskStats = {
+          ...employee.taskStats,
+          newTask: employee.taskStats.newTask + 1,
+        };
+
+        return {
+          ...employee,
+          tasks: updatedTasks,
+          taskStats: updatedTaskStats,
+        };
       }
+
+      return employee;
     });
-    setUserData(data);
-    console.log(data);
-    setAssignTo(" ");
-    setCategory(" ");
-    setDate(" ");
-    setDescription(" ");
-    setTitle(" ");
+
+    setUserData(updatedUsers);
+    localStorage.setItem("employees", JSON.stringify(updatedUsers));
+
+    setAssignTo("");
+    setCategory("");
+    setDate("");
+    setDescription("");
+    setTitle("");
   };
   return (
     <div className="p-5 bg-[#1c1c1c] mt-7 rounded">
@@ -118,4 +128,4 @@ const createTask = () => {
   );
 };
 
-export default createTask;
+export default CreateTask;

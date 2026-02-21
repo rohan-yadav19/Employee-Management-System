@@ -14,7 +14,7 @@ const TaskList = ({ data }) => {
         if (elem.active) {
           return <AcceptTask key={idx} data={elem} />;
         }
-        if (elem.NewTask) {
+        if (elem.newTask) {
           return <NewTask key={idx} data={elem} />;
         }
         if (elem.completed) {
@@ -23,6 +23,7 @@ const TaskList = ({ data }) => {
         if (elem.failed) {
           return <FailedTask key={idx} data={elem} />;
         }
+        return null;
       })}
     </div>
   );
